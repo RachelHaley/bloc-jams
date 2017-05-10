@@ -29,6 +29,21 @@ var albumMarconi = {
         ]
     };
 
+var albumElvis = {
+        title: 'Jailhouse Rock',
+        artist: 'Elvis Presley',
+        label: 'Sun Records',
+        year: '1957',
+        albumArtUrl: 'assets/images/Jailhouse_rock787.jpg',
+        songs: [
+            { title: 'Jailhouse Rock', duration: '1:01' },
+            { title: 'Young and Beautiful', duration: '5:01' },
+            { title: 'I Want to Be Free', duration: '3:21'},
+            { title: 'Dont Leave Me Now', duration: '3:14' },
+            { title: 'Youre So Square', duration: '2:15'}
+        ]
+    };
+
 var createSongRow = function (songNumber, songName, songLength) {
     "use strict";
     var template =
@@ -41,17 +56,16 @@ var createSongRow = function (songNumber, songName, songLength) {
     return template;
 };
 
-var setCurrentAlbum = function (album) {
-    "use strict";
-     // #1
     var i,
         albumTitle = document.getElementsByClassName('album-view-title')[0],
         albumArtist = document.getElementsByClassName('album-view-artist')[0],
         albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0],
         albumImage = document.getElementsByClassName('album-cover-art')[0],
         albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
-         // #2
+
+var setCurrentAlbum = function (album) {
+    "use strict";
+    
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -68,5 +82,16 @@ var setCurrentAlbum = function (album) {
  
 window.onload = function () {
     "use strict";
-    setCurrentAlbum(albumMarconi);
+    setCurrentAlbum(albumPicasso);
+    
+    var albums = [albumPicasso, albumMarconi, albumElvis];
+    var index = 1;
+    albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);  
+        index++;
+        if (index == albums.length){
+            index = 0;
+        }
+        
+    });
 };
